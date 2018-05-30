@@ -1,4 +1,4 @@
-import history from './history';
+import history from 'services/history';
 import auth0 from 'auth0-js';
 
 const AUTH_CONFIG = {
