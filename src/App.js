@@ -1,9 +1,12 @@
 import React from 'react';
+import { Route, Router } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Header } from "components";
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import { Footer } from '@auth0/styleguide-react-components';
-import NoContent from './views/NoContent/NoContent';
+import { Auth, history } from 'services';
+import { Callback, NoContent } from 'views';
+
 
 const theme = createMuiTheme({
   typography: {
@@ -17,15 +20,29 @@ const theme = createMuiTheme({
   },
 })
 
+const auth = new Auth();
+
+const handleAuthentication = ({ location }) => {
+  if (/access_token|id_token|error/.test(location.hash)) {
+    auth.handleAuthentication();
+  }
+}
+
 const App = () => (
-  <React.Fragment>
-    <CssBaseline />
-    <MuiThemeProvider theme={theme}>
-      <Header />
-      <NoContent />
-      <Footer />
-    </MuiThemeProvider>
-  </React.Fragment>
+  <Router history={history}>
+    <React.Fragment>
+      <CssBaseline />
+      <MuiThemeProvider theme={theme}>
+        <Header />
+        <Route path="/" render={(props) => <NoContent {...props} />} />
+        <Route path="/callback" render={(props) => {
+          handleAuthentication(props);
+          return <Callback {...props} />
+        }} />
+        <Footer />
+      </MuiThemeProvider>
+    </React.Fragment>
+  </Router>
 )
 
 export default App;
