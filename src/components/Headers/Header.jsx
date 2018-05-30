@@ -14,16 +14,16 @@ const styles = {
 
 const Header = (props) => {
   return (
-    <header class="site-header" >
-        <nav class="navbar navbar-default">
-          <div class="container">
-            <div class="navbar-header">
-              <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+    <header className="site-header" >
+        <nav className="navbar navbar-default">
+          <div className="container">
+            <div className="navbar-header">
+              <button className="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse"><span className="sr-only">Toggle navigation</span><span className="icon-bar"></span><span className="icon-bar"></span><span className="icon-bar"></span>
               </button>
-              <h1 class="navbar-brand"><a href="/"><span>Auth0</span></a></h1>
+              <h1 className="navbar-brand"><a href="/"><span>Auth0</span></a></h1>
             </div>
-            <div class="collapse navbar-collapse" id="navbar-collapse">
-              <div class="nav navbar-nav navbar-right">
+            <div className="collapse navbar-collapse" id="navbar-collapse">
+              <div className="nav navbar-nav navbar-right">
                 <LogInButton className="btn-transparent btn-sm"/>
                 <SignUpButton className="btn btn-success btn-sm"/>
               </div>
