@@ -39,7 +39,7 @@ const App = () => {
       <React.Fragment>
         <CssBaseline />
         <MuiThemeProvider theme={theme}>
-          <Header />
+          <Header auth={auth} />
           <Switch>
             <Route exact path="/" render={(props) => <NoContent {...props} />} />
             <Route path="/token" render={(props) => <ViewToken {...props} />} />

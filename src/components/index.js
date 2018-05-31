@@ -8,7 +8,7 @@ import SignUpButton from "./Buttons/SignUpButton.jsx";
 // ##############################
 // // // Headers
 // #############################
-import Header from "./Headers/Header.jsx";
+import Header from "./Header";
 
 export {
     Header,
