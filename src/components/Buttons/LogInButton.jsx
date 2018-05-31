@@ -4,6 +4,7 @@ import { Auth } from "services";
 const auth = new Auth();
 
 const LogInButton = (props) => (
+// eslint-disable-next-line
   <a
     href="#"
     onClick={() => auth.login()}
