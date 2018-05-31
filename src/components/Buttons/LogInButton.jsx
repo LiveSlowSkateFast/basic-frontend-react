@@ -4,11 +4,12 @@ import { Auth } from "services";
 const auth = new Auth();
 
 const LogInButton = (props) => (
-  <button
+  <a
+    href="#"
     onClick={() => auth.login()}
     className={props.className ? props.className : "btn btn-transparent"}>
     Log In
-  </button>
+  </a>
 );
 
 export default LogInButton;
