@@ -6,6 +6,7 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import { Footer } from '@auth0/styleguide-react-components';
 import { Auth, history } from 'services';
 import { Callback, NoContent } from 'views';
+import { ViewToken } from './views';
 
 
 const theme = createMuiTheme({
@@ -28,21 +29,25 @@ const handleAuthentication = ({ location }) => {
   }
 }
 
-const App = () => (
-  <Router history={history}>
-    <React.Fragment>
-      <CssBaseline />
-      <MuiThemeProvider theme={theme}>
-        <Header />
-        <Route path="/" render={(props) => <NoContent {...props} />} />
-        <Route path="/callback" render={(props) => {
-          handleAuthentication(props);
-          return <Callback {...props} />
-        }} />
-        <Footer />
-      </MuiThemeProvider>
-    </React.Fragment>
-  </Router>
-)
+const App = () => {
+  return (
+    <Router history={history} >
+      <React.Fragment>
+        <CssBaseline />
+        <MuiThemeProvider theme={theme}>
+          <Header />
+          <Route path="/" render={(props) => <NoContent {...props} />} />
+          <Route path="/token" render={(props) => <ViewToken {...props} />} />
+          <Route path="/callback" render={(props) => {
+            handleAuthentication(props);
+            return <Callback {...props} />
+          }} />
+          <Footer />
+        </MuiThemeProvider>
+      </React.Fragment>
+    </Router>
+  )
+}
+
 
 export default App;
