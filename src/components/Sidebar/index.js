@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
+import InspectTokensLink from './InspectTokensLink';
+import EmbeddedLoginLink from './EmbeddedLoginLink';
 
 const styles = {
   root: {
@@ -12,7 +13,7 @@ const styles = {
 const Sidebar = (props) => {
   const {isAuthenticated } = props.auth
 
-  const protectedLink = (link) => {
+  const requiresAuthentication = (link) => {
     return isAuthenticated() ? link : null
   }
 
@@ -20,12 +21,8 @@ const Sidebar = (props) => {
     <div id="sidebar-root-container" className="col-xs-2">
       <div className="sidebar-fixed">
         <ul style={{ listStyle: 'none', padding: 0, }}>
-          {protectedLink(
-          <Link to='/token'>
-            <li>
-              <span class="btn-icon icon-budicon-493" />{' '}Inspect Tokens
-            </li>
-          </Link>)}
+          {!isAuthenticated() ? <EmbeddedLoginLink /> : null}
+          {requiresAuthentication(<InspectTokensLink />)}
         </ul>
       </div>
     </div>
