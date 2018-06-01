@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import HeaderActions from './HeaderActions';
+import HeaderLinks from './HeaderLinks';
 
 const styles = {
   root: {
@@ -12,17 +13,19 @@ const styles = {
 const Header = (props) => {
   return (
     <header className="site-header" >
-      <nav className="navbar navbar-default">
-        <div className="container">
-          <div className="navbar-header">
-            <h1 className="navbar-brand"><a href="/"><span>Auth0</span></a></h1>
-          </div>
-          <div className="collapse navbar-collapse" id="navbar-collapse">
+        <nav className="navbar navbar-default">
+          <div className="container">
+            <div className="navbar-header">
+              <h1 className="navbar-brand"><a href="/"><span>Auth0</span></a></h1>
+            </div>
+            <div className="nav navbar-nav navbar-left">
+              <HeaderLinks auth={props.auth} />
+            </div>
             <div className="nav navbar-nav navbar-right">
               <HeaderActions auth={props.auth} />
             </div>
           </div>
-      </nav>
+        </nav>
     </header>
   );
 }
