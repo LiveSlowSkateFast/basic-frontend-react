@@ -9,7 +9,8 @@ import {
   Callback,
   NoContent,
   ViewToken,
-  NotFound
+  NotFound,
+  Welcome,
 } from 'views';
 
 
@@ -33,6 +34,11 @@ const handleAuthentication = ({ location }) => {
   }
 }
 
+const rootPage = (props) => {
+  return auth.isAuthenticated() ? <Welcome {...props} /> :
+    <NoContent {...props} auth={auth} />
+}
+
 const App = (props) => {
   return (
     <Router history={history}>
@@ -44,7 +50,7 @@ const App = (props) => {
             <Sidebar auth={auth} />
             <div className="col-xs-10 wrapper">
             <Switch>
-              <Route exact path="/" render={(props) => <NoContent {...props} auth={auth} />} />
+              <Route exact path="/" render={(props) => rootPage(props)} />
               <Route path="/token" render={(props) => <ViewToken {...props} />} />
               <Route path="/callback" render={(props) => {
                 handleAuthentication(props);
