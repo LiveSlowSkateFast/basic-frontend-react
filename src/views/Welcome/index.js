@@ -9,7 +9,7 @@ const Welcome = (props) => {
     <EmptyState
       title={"Welcome " + name}
       description="Now that you are logged in, look to the sidebar for things to do."
-      iconCode="317">
+      iconCode="602">
     </EmptyState>
   )
 }
