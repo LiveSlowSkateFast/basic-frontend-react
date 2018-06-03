@@ -11,6 +11,7 @@ import {
   ViewToken,
   NotFound,
   Welcome,
+  Unauthorized,
 } from 'views';
 
 
@@ -39,6 +40,11 @@ const rootPage = (props) => {
     <NoContent {...props} auth={auth} />
 }
 
+const requiresAuth = (view) => {
+  return auth.isAuthenticated() ? view :
+    <Unauthorized auth={auth} />
+}
+
 const App = (props) => {
   return (
     <Router history={history}>
@@ -50,8 +56,10 @@ const App = (props) => {
             <Sidebar auth={auth} />
             <div className="col-xs-10 wrapper">
             <Switch>
-              <Route exact path="/" render={(props) => rootPage(props)} />
-              <Route path="/token" render={(props) => <ViewToken {...props} />} />
+              <Route exact path="/" render={(props) =>
+                rootPage(props)} />
+              <Route path="/token" render={(props) =>
+                requiresAuth(<ViewToken {...props} />)} />
               <Route path="/callback" render={(props) => {
                 handleAuthentication(props);
                 return <Callback {...props} />
