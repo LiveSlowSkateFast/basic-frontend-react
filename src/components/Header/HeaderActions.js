@@ -22,7 +22,7 @@ const HeaderActions = (props) => {
       <ul className="nav navbar-nav navbar-right">
         <li>
           <Link
-            to='/'
+            to={window.location.pathname}
             onClick={() => auth.login()}
             className={"btn-transparent btn-sm"}>
             Log In

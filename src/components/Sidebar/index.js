@@ -13,7 +13,7 @@ const styles = {
 const Sidebar = (props) => {
   const {isAuthenticated } = props.auth
 
-  const requiresAuthentication = (link) => {
+  const requiresAuth = (link) => {
     return isAuthenticated() ? link : null
   }
 
@@ -22,7 +22,7 @@ const Sidebar = (props) => {
       <div className="sidebar-fixed">
         <ul style={{ listStyle: 'none', padding: 0, }}>
           {!isAuthenticated() ? <EmbeddedLoginLink /> : null}
-          {requiresAuthentication(<InspectTokensLink />)}
+          {requiresAuth(<InspectTokensLink />)}
         </ul>
       </div>
     </div>
