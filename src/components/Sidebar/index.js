@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import InspectTokensLink from './InspectTokensLink';
 import EmbeddedLoginLink from './EmbeddedLoginLink';
+import PasswordlessLoginLink from './PasswordlessLoginLink';
 
 const styles = {
   root: {
@@ -18,10 +19,11 @@ const Sidebar = (props) => {
   }
 
   return (
-    <div id="sidebar-root-container" className="col-xs-2">
+    <div id="sidebar-root-container" className="col-xs-3">
       <div className="sidebar-fixed">
         <ul style={{ listStyle: 'none', padding: 0, }}>
           {!isAuthenticated() ? <EmbeddedLoginLink /> : null}
+          {!isAuthenticated() ? <PasswordlessLoginLink /> : null}
           {requiresAuth(<InspectTokensLink />)}
         </ul>
       </div>

@@ -54,7 +54,7 @@ const App = (props) => {
           <Header auth={auth} />
           <div className="container root-container">
             <Sidebar auth={auth} />
-            <div className="col-xs-10 wrapper">
+            <div className="col-xs-9 wrapper">
             <Switch>
               <Route exact path="/" render={(props) =>
                 rootPage(props)} />
