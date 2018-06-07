@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Header, Sidebar } from "components";
@@ -45,35 +45,56 @@ const requiresAuth = (view) => {
     <Unauthorized auth={auth} />
 }
 
-const App = (props) => {
-  return (
-    <Router history={history}>
-      <React.Fragment>
-        <CssBaseline />
-        <MuiThemeProvider theme={theme}>
-          <Header auth={auth} />
-          <div className="container root-container">
-            <Sidebar auth={auth} />
-            <div className="col-xs-9 wrapper">
-            <Switch>
-              <Route exact path="/" render={(props) =>
-                rootPage(props)} />
-              <Route path="/token" render={(props) =>
-                requiresAuth(<ViewToken {...props} />)} />
-              <Route path="/callback" render={(props) => {
-                handleAuthentication(props);
-                return <Callback {...props} />
-              }} />
-              <Route render={(props) => <NotFound {...props} />} />
-            </Switch>
-            </div>
-          </div>
-          <Footer />
-        </MuiThemeProvider>
-      </React.Fragment>
-    </Router>
-  )
-}
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      isCheckingSession: true,
+      isLoggedIn: false,
+    };
+  }
 
+  checkSession = () => {
+    auth.checkSession().catch((e)=>{}).finally(() =>
+      auth.isAuthenticated() ? this.setState({ isLoggedIn: true }) : null
+    )
+  }
+
+  componentWillMount() {
+    if (!auth.isAuthenticated()) {
+      this.checkSession()
+    }
+  }
+
+  render() {
+    return (
+      <Router history={history}>
+        <React.Fragment>
+          <CssBaseline />
+          <MuiThemeProvider theme={theme}>
+            <Header auth={auth} />
+            <div className="container root-container">
+              <Sidebar auth={auth} />
+              <div className="col-xs-9 wrapper">
+                <Switch>
+                  <Route exact path="/" render={(props) =>
+                    rootPage(props)} />
+                  <Route path="/token" render={(props) =>
+                    requiresAuth(<ViewToken {...props} />)} />
+                  <Route path="/callback" render={(props) => {
+                    handleAuthentication(props);
+                    return <Callback {...props} />
+                  }} />
+                  <Route render={(props) => <NotFound {...props} />} />
+                </Switch>
+              </div>
+            </div>
+            <Footer />
+          </MuiThemeProvider>
+        </React.Fragment>
+      </Router >
+    )
+  }
+}
 
 export default App;
