@@ -25,7 +25,6 @@ export default class Auth {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
-        // setSession(authResult);
         history.replace('/');
       } else if (err) {
         history.replace('/');
@@ -74,7 +73,6 @@ export default class Auth {
         audience: `https://${AUTH_CONFIG.domain}/userinfo`,
         responseType: 'token id_token',
       }, (err, authResult) => {
-        console.log(err, authResult)
         if (err) {
           reject(err)
         } else{
