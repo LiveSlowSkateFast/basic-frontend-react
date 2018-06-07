@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import loading from './loading.svg';
+import { Spinner } from "components";
 
 class Callback extends Component {
   render() {
@@ -18,7 +19,7 @@ class Callback extends Component {
 
     return (
       <div style={style}>
-        <img src={loading} alt="loading"/>
+        <Spinner size='lg' logo />
       </div>
     );
   }
