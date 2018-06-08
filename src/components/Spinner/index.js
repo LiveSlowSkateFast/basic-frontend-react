@@ -6,7 +6,6 @@ const Spinner = (props) => {
   const className = 'spinner spinner-' +
     (size ? size : 'md') +
     (logo ? ' is-auth0' : '')
-  console.log(className)
   return (
     <div className={className}>
       <div className="circle"></div>
