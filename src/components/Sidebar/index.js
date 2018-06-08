@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import ConfigureDemoLink from './ConfigureDemoLink';
 import InspectTokensLink from './InspectTokensLink';
 import EmbeddedLoginLink from './EmbeddedLoginLink';
 import PasswordlessLoginLink from './PasswordlessLoginLink';
@@ -23,8 +24,12 @@ const Sidebar = (props) => {
     <div id="sidebar-root-container" className="col-xs-3">
       <div className="sidebar-fixed">
         <ul style={{ listStyle: 'none', padding: 0, }}>
-          {!isAuthenticated() ? <EmbeddedLoginLink /> : null}
-          {!isAuthenticated() ? <PasswordlessLoginLink /> : null}
+          <ConfigureDemoLink />
+          {!isAuthenticated() ?
+          <React.Fragment>
+            <EmbeddedLoginLink />
+            <PasswordlessLoginLink />
+          </React.Fragment> : null}
           {requiresAuth(
             <React.Fragment>
               <InspectTokensLink />

@@ -7,6 +7,7 @@ import { Footer } from '@auth0/styleguide-react-components';
 import { Auth, history } from 'services';
 import {
   Callback,
+  Configuration,
   NoContent,
   NotFound,
   Profile,
@@ -80,6 +81,8 @@ class App extends Component {
                 <Switch>
                   <Route exact path="/" render={(props) =>
                     rootPage(props)} />
+                  <Route path="/configuration" render={(props) =>
+                    <Configuration {...props} />} />
                   <Route path="/token" render={(props) =>
                     requiresAuth(<ViewToken {...props} />)} />
                   <Route path="/profile" render={(props) =>
