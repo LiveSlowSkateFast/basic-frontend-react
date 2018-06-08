@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { Menu, MenuItem } from '@material-ui/core';
 
 const HeaderAvatarMenu = (props) => {
@@ -9,25 +10,25 @@ const HeaderAvatarMenu = (props) => {
       anchorEl={anchorEl}
       open={Boolean(anchorEl)}
       onClose={handleClose}
-      className='"dropdown-menu"'>
-      <MenuItem
+      style={{outline: 'none' }}
+      className='"col-xs-3"'>
+      <ul style={{ listStyle: 'none', padding: '0px 10px 0px 10px', }}>
+      <Link
         to='/'
-        className="btn-transparent btn-sm"
         onClick={() => auth.logout()}>
-        Log Out
-      </MenuItem>
-      <MenuItem
+        <li><span className="btn-icon icon-budicon-449" />{' '}Log Out</li>
+      </Link>
+      <Link
         to='/'
-        className="btn-transparent btn-sm"
         onClick={() => auth.logout('deep')}>
-        Deep Log Out
-      </MenuItem>
-      <MenuItem
+        <li><span className="btn-icon icon-budicon-449" />{' '}Deep Log Out</li>
+      </Link>
+      <Link
         to='/'
-        className="btn-transparent btn-sm"
         onClick={() => auth.logout('federated')}>
-        Federated Log Out
-      </MenuItem>
+        <li><span className="btn-icon icon-budicon-449" />{' '}Federated Log Out</li>
+      </Link>
+      </ul>
     </Menu>
   )
 }
