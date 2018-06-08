@@ -1,19 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import HeaderActions from './HeaderActions';
 // import HeaderLinks from './HeaderLinks';
 
 const styles = {
-  root: {
-    flexGrow: 1,
+  siteHeader: {
+    padding: '10px 0',
   },
+  navBarDefault: {
+    borderBottom: '1px solid #f1f1f1',
+  }
 };
 
 const Header = (props) => {
   return (
-    <header className="site-header" >
-        <nav className="navbar navbar-default">
+    <header className="site-header" style={styles.siteHeader}>
+        <nav className="navbar navbar-default" style={styles.navBarDefault}>
           <div className="container">
             <div className="navbar-header">
               <h1 className="navbar-brand"><a href="/"><span>Auth0</span></a></h1>
@@ -34,4 +36,4 @@ Header.propTypes = {
   auth: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Header);
+export default Header;
