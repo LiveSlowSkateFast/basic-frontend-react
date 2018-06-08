@@ -1,15 +1,17 @@
 import Callback from "./Callback";
 import NoContent from "./NoContent";
-import ViewToken from "./ViewToken";
 import NotFound from "./NotFound";
-import Welcome from "./Welcome";
+import Profile from "./Profile";
 import Unauthorized from "./Unauthorized";
+import ViewToken from "./ViewToken";
+import Welcome from "./Welcome";
 
 export {
     Callback,
     NoContent,
-    ViewToken,
     NotFound,
-    Welcome,
+    Profile,
     Unauthorized,
+    ViewToken,
+    Welcome,
 }

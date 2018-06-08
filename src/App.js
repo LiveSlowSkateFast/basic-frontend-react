@@ -8,10 +8,11 @@ import { Auth, history } from 'services';
 import {
   Callback,
   NoContent,
-  ViewToken,
   NotFound,
-  Welcome,
+  Profile,
   Unauthorized,
+  ViewToken,
+  Welcome,
 } from 'views';
 
 
@@ -81,6 +82,8 @@ class App extends Component {
                     rootPage(props)} />
                   <Route path="/token" render={(props) =>
                     requiresAuth(<ViewToken {...props} />)} />
+                  <Route path="/profile" render={(props) =>
+                    requiresAuth(<Profile {...props} auth={auth} />)} />
                   <Route path="/callback" render={(props) => {
                     handleAuthentication(props);
                     return <Callback {...props} />

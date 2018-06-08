@@ -75,12 +75,18 @@ export default class Auth {
       }, (err, authResult) => {
         if (err) {
           reject(err)
-        } else{
+        } else {
           this.setSession(authResult).then(() => resolve())
         }
       })
     })
   }
 
+  getProfile = (cb) => {
+    this.auth0.client.userInfo(
+      localStorage.getItem('access_token'),
+      (err, user) => cb(err, user)
+    )
+  }
 
 }

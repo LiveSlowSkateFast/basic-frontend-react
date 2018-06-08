@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import InspectTokensLink from './InspectTokensLink';
 import EmbeddedLoginLink from './EmbeddedLoginLink';
 import PasswordlessLoginLink from './PasswordlessLoginLink';
+import InspectProfileLink from './InspectProfileLink';
 
 const styles = {
   root: {
@@ -12,7 +13,7 @@ const styles = {
 };
 
 const Sidebar = (props) => {
-  const {isAuthenticated } = props.auth
+  const { isAuthenticated } = props.auth
 
   const requiresAuth = (link) => {
     return isAuthenticated() ? link : null
@@ -24,7 +25,12 @@ const Sidebar = (props) => {
         <ul style={{ listStyle: 'none', padding: 0, }}>
           {!isAuthenticated() ? <EmbeddedLoginLink /> : null}
           {!isAuthenticated() ? <PasswordlessLoginLink /> : null}
-          {requiresAuth(<InspectTokensLink />)}
+          {requiresAuth(
+            <React.Fragment>
+              <InspectTokensLink />
+              <InspectProfileLink />
+            </React.Fragment>
+          )}
         </ul>
       </div>
     </div>
