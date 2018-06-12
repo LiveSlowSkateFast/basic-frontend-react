@@ -82,7 +82,8 @@ export default class Auth {
         if (err) {
           reject(err)
         } else {
-          this.setSession(authResult).then(() => resolve())
+          resolve(authResult)
+          // this.setSession(authResult).then(() => resolve())
         }
       })
     })
