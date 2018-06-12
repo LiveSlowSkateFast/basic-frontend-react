@@ -8,7 +8,8 @@ import PropTypes from 'prop-types'
 const LoginButton = (props) => {
 
   const auth = new Auth({
-    scope: props.scopes.toString().replace(/,/g, ' ')
+    scope: props.scopes.toString().replace(/,/g, ' '),
+    responseType: props.responseTypes.toString().replace(/,/g, ' '),
   })
 
   return (
@@ -26,4 +27,7 @@ LoginButton.proptypes = {
   scopes: PropTypes.arrayOf(PropTypes.string)
 };
 
-export default connect((state => ({ scopes: state.scopes })))(LoginButton)
+export default connect((state => ({
+  scopes: state.scopes,
+  responseTypes: state.responseTypes,
+})))(LoginButton)
