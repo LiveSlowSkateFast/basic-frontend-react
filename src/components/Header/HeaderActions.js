@@ -1,7 +1,7 @@
 import React from 'react'
-import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import HeaderAvatar from './HeaderAvatar';
+import LoginButton from './LoginButton';
 
 
 const HeaderActions = (props) => {
@@ -17,12 +17,7 @@ const HeaderActions = (props) => {
   ) : (
       <ul className="nav navbar-nav navbar-right">
         <li>
-          <Link
-            to={window.location.pathname}
-            onClick={() => auth.login()}
-            className="btn-transparent btn-sm">
-            Log In
-        </Link>
+          <LoginButton />
         </li>
       </ul>
     )
