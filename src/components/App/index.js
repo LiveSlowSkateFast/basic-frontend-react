@@ -11,7 +11,7 @@ const styles = {
   }
 }
 
-const auth = new Auth();
+const auth = new Auth({});
 
 class App extends Component {
   constructor() {

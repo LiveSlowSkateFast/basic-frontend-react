@@ -1,21 +1,25 @@
 import history from 'services/history';
 import auth0 from 'auth0-js';
 
-const AUTH_CONFIG = {
-  domain: 'jp-dev.auth0.com',
-  clientId: '6nD2eB5gqTaejUYinNTS0CXqu4Cumfvb',
-  callbackUrl: 'http://localhost:3000/callback'
-}
-
 export default class Auth {
-  auth0 = new auth0.WebAuth({
-    domain: AUTH_CONFIG.domain,
-    clientID: AUTH_CONFIG.clientId,
-    redirectUri: AUTH_CONFIG.callbackUrl,
-    audience: `https://${AUTH_CONFIG.domain}/userinfo`,
-    responseType: 'token id_token',
-    scope: 'openid profile'
-  });
+  constructor(config) {
+    this.domain = config.domain || 'jp-dev.auth0.com'
+    this.clientID = config.clientID || '6nD2eB5gqTaejUYinNTS0CXqu4Cumfvb'
+    this.callbackUrl = config.callbackUrl || 'http://localhost:3000/callback'
+    this.logoutUrl = config.logoutUrl || 'http://localhost:3000'
+    this.audience = config.audience || `https://${this.domain}/userinfo`
+    this.responseType = config.responseType || 'token id_token'
+    this.scope = config.scope || 'openid profile'
+
+    this.auth0 = new auth0.WebAuth({
+      domain: this.domain,
+      clientID: this.clientID,
+      redirectUri: this.callbackUrl,
+      audience: this.audience,
+      responseType: this.responseType,
+      scope: this.scope
+    })
+  }
 
   login() {
     this.auth0.authorize();
@@ -45,7 +49,9 @@ export default class Auth {
   }
 
   logout = (type) => {
-    // Clear access token and ID token from local storage
+    // With no type: Clear access token and ID token from local storage
+    // With a type definition: remove the auth0 session cookie
+    // With the type 'federated': attempt to logout from 3rd party IdP
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
@@ -53,8 +59,8 @@ export default class Auth {
     history.replace('/');
     if (type) {
       this.auth0.logout({
-        returnTo: 'http://localhost:3000',
-        client_id: AUTH_CONFIG.clientId,
+        returnTo: this.logoutUrl,
+        client_id: this.clientID,
         federated: type === 'federated'
       })
     }
@@ -70,8 +76,8 @@ export default class Auth {
   checkSession() {
     return new Promise((resolve, reject) => {
       this.auth0.checkSession({
-        audience: `https://${AUTH_CONFIG.domain}/userinfo`,
-        responseType: 'token id_token',
+        audience: `https://${this.domain}/userinfo`,
+        responseType: this.responseType,
       }, (err, authResult) => {
         if (err) {
           reject(err)
