@@ -1,4 +1,4 @@
-const scopes = (state = ['openid'], action) => {
+const scopes = (state = ['openid', 'profile'], action) => {
   switch (action.type) {
     case 'ADD_SCOPE':
       return [...state, action.scope]
