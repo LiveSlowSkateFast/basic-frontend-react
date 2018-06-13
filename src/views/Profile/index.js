@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
-import { Spinner } from "components";
+import { Spinner, Code } from "components";
 
 
 class Profile extends Component {
@@ -31,9 +31,7 @@ class Profile extends Component {
         <React.Fragment>
           <h3> User Profile </h3>
           <pre className="hl">
-            <code className="hljs actionscript">
-              {JSON.stringify(user, null, 2)}
-            </code>
+            <Code code={JSON.stringify(user, null, 2)} />
           </pre>
         </React.Fragment>
     )
