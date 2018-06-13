@@ -24,9 +24,9 @@ class App extends Component {
 
   checkSession = () => {
     auth.checkSession().catch(e => {}).then(authResult =>{
-      auth.setSession(authResult).catch(e => {}).then(() => {
+      auth.setSession(authResult).catch(e => {}).then(() =>
         auth.isAuthenticated() ? this.setState({ isLoggedIn: true }) : null
-      })
+      )
     })
   }
 
