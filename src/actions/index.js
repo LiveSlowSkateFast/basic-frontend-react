@@ -17,3 +17,8 @@ export const removeResponseType = responseType => ({
   type: 'REMOVE_RESPONSE_TYPE',
   responseType
 })
+
+export const updateResponseBody = responseBody => ({
+  type: 'UPDATE_RESPONSE_BODY',
+  responseBody
+})
