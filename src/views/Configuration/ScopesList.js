@@ -37,4 +37,6 @@ ScopesList.propTypes = {
   ),
 }
 
-export default connect((state => ({ scopes: state.scopes })), { addScope, removeScope })(ScopesList)
+export default connect((state => ({
+  scopes: state.scopes
+})), { addScope, removeScope })(ScopesList)
