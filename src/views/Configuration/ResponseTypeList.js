@@ -37,4 +37,6 @@ ResponseTypesList.propTypes = {
   ),
 }
 
-export default connect((state => ({ responseTypes: state.responseTypes })), { addResponseType, removeResponseType })(ResponseTypesList)
+export default connect((state => ({
+  responseTypes: state.responseTypes
+})), { addResponseType, removeResponseType })(ResponseTypesList)
