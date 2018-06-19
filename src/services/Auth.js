@@ -7,7 +7,7 @@ export default class Auth {
     this.clientID = config.clientID || '6nD2eB5gqTaejUYinNTS0CXqu4Cumfvb'
     this.callbackUrl = config.callbackUrl || 'http://localhost:3000/callback'
     this.logoutUrl = config.logoutUrl || 'http://localhost:3000'
-    this.audience = config.audience || `https://${this.domain}/userinfo`
+    this.audience = config.audience || 'https://basic-backend-express'
     this.responseType = config.responseType || 'token id_token'
     this.scope = config.scope || 'openid profile'
 
@@ -76,7 +76,7 @@ export default class Auth {
   checkSession() {
     return new Promise((resolve, reject) => {
       this.auth0.checkSession({
-        audience: `https://${this.domain}/userinfo`,
+        audience: this.audience,
         responseType: this.responseType,
       }, (err, authResult) => {
         if (err) {
