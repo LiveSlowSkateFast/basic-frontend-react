@@ -22,3 +22,8 @@ export const updateResponseBody = responseBody => ({
   type: 'UPDATE_RESPONSE_BODY',
   responseBody
 })
+
+export const updateAudience = audience => ({
+  type: 'UPDATE_AUDIENCE',
+  audience
+})
