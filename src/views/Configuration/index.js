@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from 'react-redux'
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Code } from 'components'
 import ScopesList from "./ScopesList";
 import ResponseTypeList from "./ResponseTypeList";
 import SendRequestButton from "./SendRequestButton";
+import AudienceSelect from "./AudienceSelect";
 
 
 const Configuration = ({ responseBody }) => (
@@ -13,6 +14,8 @@ const Configuration = ({ responseBody }) => (
       <h3> Configure Your Request </h3>
     </div>
     <div className="col-xs-8 wrapper">
+      <h5> Select Audience</h5>
+      <AudienceSelect />
       <h5> Select Scopes </h5>
       <ScopesList />
       <h5> Response Types </h5>
@@ -29,11 +32,8 @@ const Configuration = ({ responseBody }) => (
 )
 
 Configuration.propTypes = {
-  // auth: PropTypes.object.isRequired
+  responseBody: PropTypes.string
 };
-
-// export default Configuration;
-
 
 export default connect((state => ({
   responseBody: state.responseBody,

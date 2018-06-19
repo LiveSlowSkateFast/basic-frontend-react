@@ -5,11 +5,13 @@ import { Auth } from 'services'
 import PropTypes from 'prop-types'
 
 
-const SendRequestButton = ({ scopes, responseTypes, updateResponseBody }) => {
+const SendRequestButton = ({
+  audience, scopes, responseTypes, updateResponseBody }) => {
 
   const auth = new Auth({
     scope: scopes.toString().replace(/,/g, ' '),
     responseType: responseTypes.toString().replace(/,/g, ' '),
+    audience: audience,
   })
 
   const sendRequest = () => (
@@ -30,10 +32,13 @@ const SendRequestButton = ({ scopes, responseTypes, updateResponseBody }) => {
 }
 
 SendRequestButton.proptypes = {
-  scopes: PropTypes.arrayOf(PropTypes.string)
+  scopes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  responseTypes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  audience: PropTypes.string.isRequired
 };
 
 export default connect((state => ({
   scopes: state.scopes,
   responseTypes: state.responseTypes,
+  audience: state.audience,
 })), { updateResponseBody })(SendRequestButton)
