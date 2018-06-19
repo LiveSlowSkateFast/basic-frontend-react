@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import HeaderAvatar from './HeaderAvatar';
+import { Link } from "react-router-dom"
 import LoginButton from './LoginButton';
 
 
@@ -17,7 +18,13 @@ const HeaderActions = (props) => {
   ) : (
       <ul className="nav navbar-nav navbar-right">
         <li>
-          <LoginButton />
+          <Link
+            to={window.location.pathname}
+            onClick={() => auth.login()}
+            className="btn-transparent btn-sm"
+          >
+            Log In
+          </Link>
         </li>
       </ul>
     )
