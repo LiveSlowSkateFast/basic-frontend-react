@@ -1,13 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Select = ({ options, onChange }) => (
-  <select className="form-control" onChange={onChange}>
-    {options.map( option =>
-      <option key={option.value} value={option.value} >
-        {option.label}
-      </option>
-    )}
+const Select = ({ options, onChange, selected }) => (
+  <select className="form-control" onChange={onChange} >
+    {options.map(option => (
+      selected === option.value ?
+        <option key={option.value} value={option.value} selected >
+          {option.label}
+        </option> :
+        <option key={option.value} value={option.value} >
+          {option.label}
+        </option> ))}
   </select>
 )
 
@@ -17,6 +20,7 @@ Select.propTypes = {
     value: PropTypes.string.isRequired,
   })),
   onChange: PropTypes.func,
+  selected: PropTypes.string,
 }
 
 export default Select
