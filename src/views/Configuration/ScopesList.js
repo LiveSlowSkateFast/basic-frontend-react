@@ -5,8 +5,10 @@ import { addScope, removeScope } from 'actions'
 import { ScopeToggle } from 'components'
 
 const availableScopes = [
+  'openid',
   'profile',
   'email',
+  'edit:profile'
 ]
 
 const ScopesList = ({ scopes, addScope, removeScope }) => {
@@ -17,7 +19,6 @@ const ScopesList = ({ scopes, addScope, removeScope }) => {
 
   return (
     <div className="scopes-list" >
-      <ScopeToggle scope='openid' onClick={()=>{}} checked disabled />
       {availableScopes.map(scope =>
         <ScopeToggle
           key={scope}
