@@ -2,8 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import HeaderAvatar from './HeaderAvatar';
 import { Link } from "react-router-dom"
-import LoginButton from './LoginButton';
-
 
 const HeaderActions = (props) => {
   const { auth } = props
