@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { Spinner, Code } from "components";
+import { ServerAPI } from 'services'
 
+const api = new ServerAPI()
 
 class Profile extends Component {
 
@@ -13,11 +15,10 @@ class Profile extends Component {
   }
 
   componentWillMount() {
-    const { auth } = this.props
-    auth.getProfile((err, user) => {
+    api.getProfile((err, user) => {
       if (err) {
         console.log(err)
-        this.setState({ user: {} })
+        this.setState({ user: { error: err } })
       } else {
         this.setState({ user: user })
       }
