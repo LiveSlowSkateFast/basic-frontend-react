@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const ScopeToggle = ({ onClick, scope, checked, disabled }) => (
-  <div className="scope-toggle" onClick={onClick}>
+  <div className="scope-toggle" onClick={onClick} style={{lineHeight: 1, paddingBottom: 10}}>
     <input
       className="scope-input"
       type="checkbox"

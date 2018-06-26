@@ -4,14 +4,7 @@ import PropTypes from 'prop-types'
 import { addScope, removeScope } from 'actions'
 import { ScopeToggle } from 'components'
 
-const availableScopes = [
-  'openid',
-  'profile',
-  'email',
-  'edit:profile'
-]
-
-const ScopesList = ({ scopes, addScope, removeScope }) => {
+const ScopesList = ({ scopes, addScope, removeScope, availableScopes }) => {
 
   const toggleScope = scope => (
     scopes.includes(scope) ? () => removeScope(scope) : () => addScope(scope)
@@ -21,10 +14,10 @@ const ScopesList = ({ scopes, addScope, removeScope }) => {
     <div className="scopes-list" >
       {availableScopes.map(scope =>
         <ScopeToggle
-          key={scope}
-          scope={scope}
-          onClick={toggleScope(scope)}
-          checked={scopes.includes(scope)} />
+          key={scope.value}
+          scope={scope.value}
+          onClick={toggleScope(scope.value)}
+          checked={scopes.includes(scope.value)} />
       )}
     </div>
   )

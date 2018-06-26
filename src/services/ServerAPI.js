@@ -10,7 +10,18 @@ export default class ServerAPI {
   getProfile(cb) {
     axios.get(this.domain + '/profile', {
       headers: { 'Authorization': 'Bearer ' + this.accessToken() },
-      json: true
+    }).then(res => cb(null, res.data)).catch(err => cb(err))
+  }
+
+  getResourceServers(cb) {
+    axios.get(this.domain + '/resource-servers', {
+      headers: { 'Authorization': 'Bearer ' + this.accessToken() },
+    }).then(res => cb(null, res.data)).catch(err => cb(err))
+  }
+
+  getResourceServerScopes(rescourceServerId, cb) {
+    axios.get(this.domain + '/resource-servers/' + rescourceServerId + '/scopes', {
+      headers: { 'Authorization': 'Bearer ' + this.accessToken() },
     }).then(res => cb(null, res.data)).catch(err => cb(err))
   }
 
@@ -18,5 +29,12 @@ export default class ServerAPI {
     axios.get(this.domain + '/')
     .then(res => cb(null, res.data)).catch(err => cb(err))
   }
+
+  test(endpoint, cb) {
+    axios.get(this.domain + endpoint, {
+      headers: { 'Authorization': 'Bearer ' + this.accessToken() },
+    }).then(res => cb(null, res.data)).catch(err => cb(err))
+  }
+
 
 }

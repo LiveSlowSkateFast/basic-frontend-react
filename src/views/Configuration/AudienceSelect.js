@@ -4,21 +4,29 @@ import PropTypes from 'prop-types'
 import { updateAudience } from 'actions'
 import { Select } from 'components'
 
-const availableAudiences = [
-  'https://jp-dev.auth0.com/api/v2/',
-  'https://jp-dev.auth0.com/userinfo',
-  'https://basic-backend-express',
-]
-
-const AudienceSelect = ({ currentAudience, updateAudience }) => (
+const AudienceSelect = ({ availableResources, currentAudience, updateAudience, onChange }) => (
   <Select
-    options={availableAudiences.map(audience => (
-      { label: audience, value: audience }))}
-    onChange={e => updateAudience(e.target.value)}
-    selected={currentAudience} />
+    options={availableResources.map(resource => (
+      { label: resource.name, value: resource.id }
+    ))}
+    onChange={e => {
+      const resource = availableResources.find(res =>
+        res.id === e.target.value)
+      updateAudience(resource.audience)
+      onChange(resource.id)
+    }}
+    selected={availableResources.find(resource =>
+      resource.audience === currentAudience).id} />
 )
 
 AudienceSelect.propTypes = {
+  availableResources: PropTypes.arrayOf(
+    PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    audience: PropTypes.string.isRequired,
+  })),
+  onChange: PropTypes.func.isRequired,
   currentAudience: PropTypes.string.isRequired,
   updateAudience: PropTypes.func.isRequired,
 }
