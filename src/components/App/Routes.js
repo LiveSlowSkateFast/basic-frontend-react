@@ -7,6 +7,7 @@ import {
   NoContent,
   NotFound,
   Profile,
+  TestEndpoint,
   Unauthorized,
   ViewToken,
   Welcome,
@@ -42,6 +43,8 @@ const Routes = (props) => {
         requiresAuth(<ViewToken {...props} />)} />
       <Route path="/profile" render={(props) =>
         requiresAuth(<Profile {...props} auth={auth} />)} />
+      <Route path="/test" render={(props) =>
+        requiresAuth(<TestEndpoint {...props} auth={auth} />)} />
       <Route path="/callback" render={(props) => {
         handleAuthentication(props);
         return <Callback {...props} />

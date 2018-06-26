@@ -6,6 +6,7 @@ import InspectTokensLink from './InspectTokensLink';
 import EmbeddedLoginLink from './EmbeddedLoginLink';
 import PasswordlessLoginLink from './PasswordlessLoginLink';
 import InspectProfileLink from './InspectProfileLink';
+import TestApiLink from './TestApiLink';
 
 const styles = {
   root: {
@@ -34,6 +35,7 @@ const Sidebar = (props) => {
             <React.Fragment>
               <InspectTokensLink />
               <InspectProfileLink />
+              <TestApiLink />
             </React.Fragment>
           )}
         </ul>
