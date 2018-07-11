@@ -21,8 +21,9 @@ export default class Auth {
     })
   }
 
-  login() {
-    this.auth0.authorize();
+  login(config) {
+    const conf = config ? config : {ui_locales: 'en'}
+    this.auth0.authorize(conf);
   }
 
   handleAuthentication() {
