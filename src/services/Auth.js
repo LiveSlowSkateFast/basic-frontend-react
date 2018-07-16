@@ -22,7 +22,7 @@ export default class Auth {
   }
 
   login(config) {
-    const conf = config ? config : {ui_locales: 'en'}
+    const conf = config ? config : {}
     this.auth0.authorize(conf);
   }
 
