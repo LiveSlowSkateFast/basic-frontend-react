@@ -38,7 +38,7 @@ const Routes = (props) => {
       <Route exact path="/" render={(props) =>
         rootPage(props)} />
       <Route path="/configuration" render={(props) =>
-        <Configuration {...props} />} />
+        requiresAuth(<Configuration {...props} />)} />
       <Route path="/token" render={(props) =>
         requiresAuth(<ViewToken {...props} />)} />
       <Route path="/profile" render={(props) =>

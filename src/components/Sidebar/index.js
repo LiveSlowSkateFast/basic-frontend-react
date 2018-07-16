@@ -25,7 +25,6 @@ const Sidebar = (props) => {
     <div id="sidebar-root-container" className="col-xs-3">
       <div className="sidebar-fixed">
         <ul style={{ listStyle: 'none', padding: 0, }}>
-          <ConfigureDemoLink />
           {!isAuthenticated() ?
           <React.Fragment>
             <EmbeddedLoginLink />
@@ -33,6 +32,7 @@ const Sidebar = (props) => {
           </React.Fragment> : null}
           {requiresAuth(
             <React.Fragment>
+              <ConfigureDemoLink />
               <InspectTokensLink />
               <InspectProfileLink />
               <TestApiLink />
