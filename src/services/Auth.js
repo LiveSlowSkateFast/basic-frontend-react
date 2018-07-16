@@ -26,6 +26,11 @@ export default class Auth {
     this.auth0.authorize(conf);
   }
 
+  signUp(config) {
+    const conf = config ? Object.assign(config, { initialScreen: 'signUp' }) : { initialScreen: 'signUp' }
+    this.auth0.authorize(conf)
+  }
+
   handleAuthentication() {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {

@@ -13,6 +13,11 @@ const NoContent = (props) => {
         className="btn btn-success">
         Log In
       </button>
+      <button
+        onClick={() => auth.signUp()}
+        className="btn btn-transparent">
+        Sign Up
+      </button>
     </EmptyState>
   )
 }
