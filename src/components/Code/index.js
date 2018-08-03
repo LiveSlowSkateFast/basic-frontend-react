@@ -7,7 +7,15 @@ import './styles.css';
 
 class Code extends Component {
 
+
   componentDidMount() {
+    hljs.configure({
+      classPrefix: 'sc-hljs-'
+    });
+    hljs.highlightBlock(this.codeBlock);
+  }
+
+  componentDidUpdate() {
     hljs.configure({
       classPrefix: 'sc-hljs-'
     });
