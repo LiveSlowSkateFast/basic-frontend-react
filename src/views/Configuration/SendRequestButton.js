@@ -14,11 +14,12 @@ const SendRequestButton = ({
     audience: audience,
   })
 
-  const sendRequest = () => (
+  const sendRequest = () => {
+    updateResponseBody('{}')
     auth.checkSession()
       .then(authResponse => updateResponseBody(JSON.stringify(authResponse, null, 2)))
-      .catch(err => console.log(err))
-  )
+      .catch(err => updateResponseBody(JSON.stringify(err, null, 2)))
+  }
 
   return (
     <button
