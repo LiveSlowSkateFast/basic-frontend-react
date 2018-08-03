@@ -5,6 +5,7 @@ import ScopeToggle from "./ScopeToggle";
 import Select from "./Select";
 import Sidebar from "./Sidebar";
 import Spinner from "./Spinner";
+import TabBox from "./TabBox";
 
 export {
     App,
@@ -14,4 +15,5 @@ export {
     Select,
     Sidebar,
     Spinner,
+    TabBox,
 }
