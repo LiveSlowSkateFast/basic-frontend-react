@@ -10,6 +10,7 @@ import { ServerAPI } from 'services'
 import Spinner from "../../components/Spinner";
 
 const api = new ServerAPI()
+const oidc_scopes = [{ value: 'oidc' }, { value: 'profile' }, { value: 'email' }, { value: 'address' }, { value: 'phone' },]
 
 class Configuration extends Component {
   constructor(props) {
@@ -21,10 +22,17 @@ class Configuration extends Component {
     }
   }
 
+  handleScopesResponse = (err, res) => {
+    err ? console.log(err) :
+      this.setState({
+        availableScopes: res ? oidc_scopes.concat(res) : oidc_scopes
+      })
+  }
+
   onAudienceUpdate = audienceId => {
-    this.setState({availableScopes: []})
+    this.setState({ availableScopes: [] })
     api.getResourceServerScopes(audienceId, (err, res) =>
-      err ? console.log(err) : this.setState({ availableScopes: res }))
+      this.handleScopesResponse(err, res))
   }
 
   componentWillMount() {
@@ -33,7 +41,7 @@ class Configuration extends Component {
         this.setState({ availableResources: res }),
         api.getResourceServerScopes(this.state.availableResources.find(res =>
           res.audience === this.state.currentAudience).id, (err, res) =>
-          err ? console.log(err) : this.setState({ availableScopes: res }))
+            this.handleScopesResponse(err, res))
       ))
   }
 
@@ -46,15 +54,15 @@ class Configuration extends Component {
         <div className="col-xs-12 wrapper">
           <h5>Choose a Resource Server</h5>
         </div>
-          <div className="col-xs-8 wrapper">
-            <AudienceSelect
-              availableResources={availableResources}
-              onChange={this.onAudienceUpdate}
-            />
-          </div>
-          <div className="col-xs-4 wrapper">
-            <SendRequestButton />
-          </div>
+        <div className="col-xs-8 wrapper">
+          <AudienceSelect
+            availableResources={availableResources}
+            onChange={this.onAudienceUpdate}
+          />
+        </div>
+        <div className="col-xs-4 wrapper">
+          <SendRequestButton />
+        </div>
         <div className="col-xs-12 wrapper">
           <h5> Select Scopes </h5>
           {availableScopes.length === 0 ? <Spinner logo /> : (
