@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
-import { Code } from 'components'
+import { Code, TabBox } from 'components'
 import ScopesList from "./ScopesList";
 import ResponseTypeList from "./ResponseTypeList";
 import SendRequestButton from "./SendRequestButton";
 import AudienceSelect from "./AudienceSelect";
 import { ServerAPI } from 'services'
 import Spinner from "../../components/Spinner";
+import jwt_decode from "jwt-decode";
 
 const api = new ServerAPI()
-const oidc_scopes = [{ value: 'oidc' }, { value: 'profile' }, { value: 'email' }, { value: 'address' }, { value: 'phone' },]
+const oidc_scopes = [{ value: 'openid' }, { value: 'profile' }, { value: 'email' }, { value: 'address' }, { value: 'phone' },]
+
 
 class Configuration extends Component {
   constructor(props) {
@@ -45,8 +47,27 @@ class Configuration extends Component {
       ))
   }
 
+  createTabs(responseBody) {
+    const resObj = JSON.parse(responseBody)
+    const tabs = [{ isActive: true, name: "Raw", id: "1", content: <Code code={responseBody} /> }]
+    if (resObj.idToken) {
+      tabs.push({
+        name: "Id Token", id: "2",
+        content: <Code code={JSON.stringify(jwt_decode(resObj.idToken), null, 2)} />
+      })
+    }
+    if (resObj.accessToken) {
+      tabs.push({
+        name: "Access Token", id: "3",
+        content: <Code code={JSON.stringify(jwt_decode(resObj.accessToken), null, 2)} />
+      })
+    }
+    return tabs
+  }
+
   render() {
     const { responseBody } = this.props
+    // alert(responseBody)
     const { availableResources, availableScopes } = this.state
     return availableResources.length === 0 ? <Spinner size='lg' logo /> : (
       <React.Fragment>
@@ -70,11 +91,13 @@ class Configuration extends Component {
               availableScopes={availableScopes}
             />)}
         </div>
-        {/* <h5> Response Types </h5>
-          <ResponseTypeList /> */}
+        <div className="col-xs-12 wrapper">
+          <h5> Response Types </h5>
+          <ResponseTypeList />
+        </div>
         <div className="col-xs-12 wrapper">
           <h3> View Response </h3>
-          <Code code={responseBody} />
+          <TabBox tabs={this.createTabs(responseBody)} />
         </div>
       </React.Fragment>
     )
